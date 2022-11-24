@@ -158,7 +158,7 @@ jobs:
           files: reports/unit-tests-report.xml
 
       - name: Setup Code Climate test-reporter
-        if: ${{ secrets.CC_TEST_REPORTER_ID }}
+        if: secrets.CC_TEST_REPORTER_ID
         shell: bash
         run: |
           # download test reporter as a static binary
@@ -166,7 +166,7 @@ jobs:
           chmod +x ./cc-test-reporter
 
       - name: Run code-climate-test-reporter
-        if: ${{ secrets.CC_TEST_REPORTER_ID }}
+        if: secrets.CC_TEST_REPORTER_ID
         shell: bash
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
