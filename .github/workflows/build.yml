@@ -157,23 +157,6 @@ jobs:
           check_name: Unit-test results
           files: reports/unit-tests-report.xml
 
-      - name: Setup Code Climate test-reporter
-        if: secrets.CC_TEST_REPORTER_ID
-        shell: bash
-        run: |
-          # download test reporter as a static binary
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-
-      - name: Run code-climate-test-reporter
-        if: secrets.CC_TEST_REPORTER_ID
-        shell: bash
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        run: |
-          ./cc-test-reporter format-coverage coverage/lcov.info --input-type lcov --output reports/codeclimate.json
-          ./cc-test-reporter upload-coverage --input reports/codeclimate.json
-
   npm-dependencies:
     name: Validate dependencies
     runs-on: ubuntu-latest
