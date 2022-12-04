@@ -40,7 +40,12 @@ export class OutputParser {
         }
 
         if (contents.reason !== "compiler-message") {
-            core.debug(`Unexpected reason field, ignoring it: ${contents.reason}`);
+            if (
+                contents.reason !== "compiler-artifact" &&
+                contents.reason !== "build-script-executed"
+            ) {
+                core.debug(`Unexpected reason field, ignoring it: ${contents.reason}`);
+            }
             return;
         }
 
